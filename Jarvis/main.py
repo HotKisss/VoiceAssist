@@ -1,11 +1,6 @@
 import sys
-import webbrowser
 import speech_recognition as sr
-import playsound
-from gtts import gTTS
-import pyjokes
 import os
-import datetime
 import pyttsx3
 import subprocess
 
@@ -36,7 +31,7 @@ def command():
 def make_something(task):
    
     if 'алан' in task:
-        subprocess.Popen(['python', r'F:\Jarvis\jarvis.py'])
+        subprocess.Popen(['python', r'F:\Repository\VoiceAssist\Jarvis\jarvis.py'])
         exit(0)
 
 speak_engine = pyttsx3.init()

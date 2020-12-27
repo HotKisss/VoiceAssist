@@ -81,8 +81,13 @@ def execute_cmd(cmd):
             speak("Кому отправить сообщение?")
             messageState = "whoState"
             print(messageState)
-
-
+        
+        elif 'Lamp' in cmd:
+            os.system(r'F:\Repository\VoiceAssist\Jarvis\Lamp.lnk')
+            speak("Ку ку, я сверху")
+        elif 'Headphones' in cmd:
+            os.system(r'F:\Repository\VoiceAssist\Jarvis\Razer.lnk')
+            speak("Я вернулся")
 
         elif 'quit' in cmd:
             z = ["Пока друг", "Надеюсь ещё увидимся", "Бб", "Аривидэрчи", "Покасики", "Чеши бока ёпта, давай бывай"]
@@ -90,17 +95,18 @@ def execute_cmd(cmd):
             shutDownThisProgramAndOpenMain()
 
 
-        elif 'music' in cmd:
-            global musicOn
-            musicOn = True
-            speak("Вы хотите чтобы я включил вам музыку?")
+        elif 'включи' in voice and 'music' in cmd:
+            speak("Включаю музыку")
+            music.playMusic()
+        elif 'выключи' in voice and 'music' in cmd:
+            speak("Выключаю музыку")
+            music.offMusic()
 
         elif 'yes' in cmd:
             try:
-                if musicOn == True:
-                    musicOn = False
-                    speak("Хорошо, включаю музыку")
-                    music.playMusic()
+                pass
+                    
+                    
             except:
                 pass
         
@@ -165,6 +171,7 @@ def sendTheMessage():
     elif messageState == "more":
         if voice == "да":
             messageState = "whatState"
+            speak("Что будем писать?")
         elif voice == "нет":
             speak("Хорошо")
             messageState = " "
@@ -172,7 +179,7 @@ def sendTheMessage():
 
 
 def shutDownThisProgramAndOpenMain():
-    subprocess.Popen(['python', r'F:\Jarvis\main.py'])
+    subprocess.Popen(['python', r'F:\Repository\VoiceAssist\Jarvis\main.py'])
     os.system('cls')
     exit(0)
 

@@ -8,7 +8,7 @@ import pickle
 from selenium import webdriver
 import requests
 import time
-
+import psutil
 
 path = r'F:\Something\\chromedriver.exe'
 
@@ -16,19 +16,14 @@ def sendMessage():
     global browser
     try:
         browser = webdriver.Chrome(executable_path=path)
-        browser.get('https://vk.com/im')
-    #time.sleep(30)
-    #pickle.dump(browser.get_cookies(), open(r'F:\Jarvis\session', 'wb'))
-    #print('Куки сохранены')
-        for cookie in pickle.load(open(r'F:\Jarvis\session', 'rb')):
-            browser.add_cookie(cookie)
-
-        browser.get('https://vk.com/im')
-        time.sleep(2)
+        openMessanger()
     except:
-        print("Не получилось открыть браузер")
+        pass
+
+
+
+
 def sendWho(who):
-    print("asdasd")
     searchStr = browser.find_element_by_id('im_dialogs_search')
     searchStr.send_keys(who)
     time.sleep(2)
@@ -39,12 +34,18 @@ def sendWhat(what):
     time.sleep(1)
     browser.find_element_by_class_name('im-send-btn_send').click()
 
-#def pickDialog():
-
     
+def openMessanger():
+    browser.get('https://vk.com/im')
+    for cookie in pickle.load(open(r'F:\Repository\VoiceAssist\Jarvis\session', 'rb')):
+        browser.add_cookie(cookie)
 
+    browser.get('https://vk.com/im')
+    time.sleep(2)
 
-
+#time.sleep(30)
+#pickle.dump(browser.get_cookies(), open(r'F:\Jarvis\session', 'wb'))
+#print('Куки сохранены')
 
 
 
